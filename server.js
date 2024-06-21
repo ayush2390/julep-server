@@ -23,11 +23,14 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: "*", // Allow any origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
     credentials: true,
     optionsSuccessStatus: 204,
   })
 );
+
+app.options("*", cors()); // Preflight OPTIONS handler
 
 // Serve static files (index.html)
 app.use(express.static(path.join(__dirname, "public")));
