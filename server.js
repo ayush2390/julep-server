@@ -18,7 +18,16 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+
+// Configure CORS
+app.use(
+  cors({
+    origin: "*", // Allow any origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
+  })
+);
 
 // Serve static files (index.html)
 app.use(express.static(path.join(__dirname, "public")));
